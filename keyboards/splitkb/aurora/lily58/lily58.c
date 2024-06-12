@@ -183,16 +183,12 @@ void render_logo(void) {
     oled_set_cursor(0, 4);
 }
 
-void render_logo_text(void) {
-    oled_write_P(PSTR("lilly"), false);
-}
-
 void render_kb_LED_state(void) {
     // Host Keyboard LED Status
     led_t led_usb_state = host_keyboard_led_state();
     oled_write_P(led_usb_state.num_lock ? PSTR("N ") : PSTR("  "), false);
     oled_write_P(led_usb_state.caps_lock ? PSTR("C ") : PSTR("  "), false);
-    oled_write_P(led_usb_state.scroll_lock ? PSTR("S ") : PSTR("  "), false);
+    oled_write_P(led_usb_state.scroll_lock ? PSTR("S") : PSTR(" "), false);
 }
 
 void render_layer_state(void) {
@@ -236,13 +232,13 @@ bool oled_task_kb(void) {
     if (is_keyboard_master()) {
         // Renders the current keyboard state (layers and mods)
         render_logo();
-        render_logo_text();
+        render_space();
+        render_kb_LED_state();
         render_space();
         render_layer_state();
         render_space();
         render_mod_status_gui_alt(get_mods()|get_oneshot_mods());
         render_mod_status_ctrl_shift(get_mods()|get_oneshot_mods());
-        render_kb_LED_state();
     } else {
         // clang-format off
         static const char PROGMEM aurora_art[] = {
