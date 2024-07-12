@@ -184,7 +184,7 @@ void render_logo(void) {
 }
 
 bool isMacModeActive(void) {
-    return keymap_config.swap_control_gui;
+    return keymap_config.swap_lctl_lgui;
 }
 
 void render_kb_LED_state(void) {
